@@ -1,0 +1,65 @@
+function init() {
+  iteration = 0
+  if(id == 0) {
+    # Source robot
+    mydist = 0.
+  }
+  else {
+    # Other robots
+    mydist = 1000.
+    # Listen to other robots' distances
+    neighbors.listen("dist_to_source",
+      function(value_id, value, robot_id) {
+        mydist = math.min(
+          mydist,
+          neighbors.get(robot_id).distance + value)
+      })
+  }
+}
+
+function step() {
+  debug(mydist)
+  # Added color gradient from red (closest) to blue (furthest)
+  if(mydist < 100) {
+    setleds(255,0,0)
+  }
+  else if (mydist >= 100 and mydist < 200) {
+    setleds(255,102,0)
+  }
+  else if (mydist >= 200 and mydist < 300) {
+    setleds(255,204,0)
+  }
+    else if (mydist >= 300 and mydist < 400) {
+    setleds(204,255,0)
+  }
+    else if (mydist >= 400 and mydist < 500) {
+    setleds(101,255,0)
+  }
+    else if (mydist >= 500 and mydist < 600) {
+    setleds(0,255,0)
+  }
+    else if (mydist >= 600 and mydist < 700) {
+    setleds(0,255,101)
+  }
+    else if (mydist >= 700 and mydist < 800) {
+    setleds(0,255,203)
+  }
+    else if (mydist >= 800 and mydist < 900) {
+    setleds(0,203,255)
+  }
+    else if (mydist >= 900 and mydist < 1000) {
+    setleds(0,101,255)
+  } 
+    else  {
+    setleds(0,0,255)
+  }
+
+  # Set message to be passed every 3s
+  if(iteration % 30 == 0) {
+    neighbors.broadcast("dist_to_source", mydist)
+  }
+  iteration = iteration + 1
+}
+
+function destroy() {
+}
