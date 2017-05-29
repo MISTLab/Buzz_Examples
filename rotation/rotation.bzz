@@ -1,8 +1,3 @@
-include "include/vec2.bzz"
-include "include/string.bzz"
-#################################################
-### UTILITY FUNCTIONS ###########################
-#################################################
 
 # Write a table as if it was a matrix
 function write_knowledge(k, row, col, val) {

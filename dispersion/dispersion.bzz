@@ -1,4 +1,4 @@
-include "include/vec2.bzz"
+
  
 # Lennard-Jones parameters
 TARGET     = 500.0
