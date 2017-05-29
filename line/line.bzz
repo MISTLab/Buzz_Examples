@@ -161,7 +161,6 @@ function rotate() {
 }
 
 function alignNearestBot(bot, angle) {
-  log("align nearest bot :",id , bot)
 	arm_offset = degrees_interval(read_knowledge(knowledge, bot, 1) - angle)
   if (arm_offset<1 and arm_offset>(-1)) {
       #Calculate the next angle

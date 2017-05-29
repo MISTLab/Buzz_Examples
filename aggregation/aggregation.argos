@@ -1,0 +1,97 @@
+<?xml version="1.0" ?>
+<argos-configuration>
+
+  <!-- ************************* -->
+  <!-- * General configuration * -->
+  <!-- ************************* -->
+  <framework>
+    <system threads="0" />
+    <experiment length="0"
+                ticks_per_second="10"
+                random_seed="123" />
+  </framework>
+
+  <!-- *************** -->
+  <!-- * Controllers * -->
+  <!-- *************** -->
+  <controllers>
+
+    <buzz_controller_footbot id="bcf">
+      <actuators>
+        <differential_steering implementation="default" />
+        <leds                  implementation="default" medium="leds" />
+        <range_and_bearing implementation="default" />
+      </actuators>
+      <sensors>
+        <range_and_bearing implementation="medium" medium="rab" show_rays="true" noise_std_dev="0" />
+      </sensors>
+      <!-- <params bytecode_file="aggregation.bzz.bo" debug_file="aggregation.bzz.bdb"> -->
+      <params>
+        <wheel_turning hard_turn_angle_threshold="90"
+                       soft_turn_angle_threshold="70"
+                       no_turn_angle_threshold="10"
+                       max_speed="10" />
+      </params>
+    </buzz_controller_footbot>
+
+  </controllers>
+
+  <!-- *********************** -->
+  <!-- * Arena configuration * -->
+  <!-- *********************** -->
+  <arena size="50, 50, 4" center="0,0,2">
+
+    <box id="wall_north" size="40,0.1,0.5" movable="false">
+      <body position="0,20,0" orientation="0,0,0" />
+    </box>
+    <box id="wall_south" size="40,0.1,0.5" movable="false">
+      <body position="0,-20,0" orientation="0,0,0" />
+    </box>
+    <box id="wall_east" size="0.1,40,0.5" movable="false">
+      <body position="20,0,0" orientation="0,0,0" />
+    </box>
+    <box id="wall_west" size="0.1,40,0.5" movable="false">
+      <body position="-20,0,0" orientation="0,0,0" />
+    </box>
+
+    <distribute>
+      <position method="uniform" min="-2,-2,0" max="2,2,0" />
+      <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
+      <entity quantity="10" max_trials="100">
+        <foot-bot id="fb" rab_data_size="300">
+          <controller config="bcf" />
+        </foot-bot>
+      </entity>
+    </distribute>
+
+  </arena>
+
+  <!-- ******************* -->
+  <!-- * Physics engines * -->
+  <!-- ******************* -->
+  <physics_engines>
+    <dynamics2d id="dyn2d" />
+  </physics_engines>
+
+  <!-- ********* -->
+  <!-- * Media * -->
+  <!-- ********* -->
+  <media>
+    <range_and_bearing id="rab" />
+    <led id="leds" />
+  </media>
+
+  <!-- ****************** -->
+  <!-- * Visualization * -->
+  <!-- ****************** -->
+  <visualization>
+    <qt-opengl>
+      <camera>
+        <placement idx="0" position="-3.81904,0.306014,10.4364" look_at="-3.49366,0.212449,9.49544" lens_focal_length="20" />
+        <placement idx="1" position="-1.40203,0,3.23277" look_at="-1.08235,0,2.28525" lens_focal_length="20" />
+      </camera>
+      <user_functions label="buzz_qt" />
+    </qt-opengl>
+  </visualization>
+
+</argos-configuration>
