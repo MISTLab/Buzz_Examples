@@ -25,7 +25,7 @@ function barrier_wait(threshold, transf) {
 
 # The final state
 function rgb_red() {
-  setleds(255,0,0)
+  set_leds(255,0,0)
   set_wheels(10.0,-10.0)
   #debug("red")
 }

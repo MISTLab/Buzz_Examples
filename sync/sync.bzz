@@ -48,9 +48,9 @@ function step() {
 	b = next_flash + FLASH_LENGTH
 
 	if(a < b) {
-		setleds(255,0,0)
+		set_leds(255,0,0)
 	} else {
-		setleds(0,0,0)
+		set_leds(0,0,0)
 	}
 
 	if(iteration > 50 and iteration % 10 == 0) {
