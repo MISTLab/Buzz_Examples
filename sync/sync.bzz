@@ -29,11 +29,10 @@ function init() {
 	iteration = 0
 	FLASH_PERIOD = 30
 	FLASH_LENGTH = 3
-	rng.setseed(id)
-	next_flash = rng.uniform(1,200) % 30
+	math.rng.setseed(id)
+	next_flash = math.rng.uniform(1,200) % 30
 	 # random number generator goes here instead of ID
 	receiveOffset()
-	
 }
 
 # Executed every time step

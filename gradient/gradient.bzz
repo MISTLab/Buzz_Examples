@@ -18,7 +18,6 @@ function init() {
 }
 
 function step() {
-  debug(mydist)
   # Added color gradient from red (closest) to blue (furthest)
   if(mydist < 100) {
     set_leds(255,0,0)
