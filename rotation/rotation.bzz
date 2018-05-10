@@ -9,7 +9,7 @@ function write_knowledge(k, row, col, val) {
 function read_knowledge(k, row, col) {
     var key = string.concat(string.tostring(row),"-",string.tostring(col))
     if (k[key] == nil) {
-        # log("Warning: reading 'nil' value from the knowledge table, returning -1")
+        log("Warning: reading 'nil' value from the knowledge table, returning -1")
         return -1
     } else {
         return k[key]
@@ -19,7 +19,7 @@ function read_knowledge(k, row, col) {
 # Int to String 
 function itos(i) {
     
-    #log("Use 'string.tostring(OJB)' instead")
+    log("Use 'string.tostring(OJB)' instead")
     
     if (i==0) { return "0" }
     if (i==1) { return "1" }
@@ -32,7 +32,7 @@ function itos(i) {
     if (i==8) { return "8" }
     if (i==9) { return "9" }
     
-    #log("Function 'itos' out of bounds, returning the answer (42)")
+    log("Function 'itos' out of bounds, returning the answer (42)")
     return "42"
 }
 
@@ -49,7 +49,7 @@ function stoi(s) {
    if (s=='8') { return 8 }
    if (s=='9') { return 9 }
    
-   #log("Function 'stoi' out of bounds, returning the answer (42)")
+   log("Function 'stoi' out of bounds, returning the answer (42)")
    return 42
    
 }
