@@ -1,5 +1,6 @@
+# We need this for 2D vectors
+include "vec2.bzz"
 
- 
 # Lennard-Jones parameters
 TARGET     = 500.0
 EPSILON    = 150.0

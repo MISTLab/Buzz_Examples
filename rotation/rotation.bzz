@@ -9,7 +9,7 @@ function write_knowledge(k, row, col, val) {
 function read_knowledge(k, row, col) {
     var key = string.concat(string.tostring(row),"-",string.tostring(col))
     if (k[key] == nil) {
-        # log("Warning: reading 'nil' value from the knowledge table, returning -1")
+        log("Warning: reading 'nil' value from the knowledge table, returning -1")
         return -1
     } else {
         return k[key]
@@ -138,7 +138,7 @@ function align(robot) {
   inform_your_neighborhood()
   interval = (read_knowledge(knowledge,robot,0)) - (read_knowledge(knowledge,robot,1) + 180)
   interval = degrees_interval(interval)
-  debug(interval)
+  #debug(interval)
   if(interval < 5 and interval > (-5)) {
     goto(0.0,0.0)
     statef = nextState
@@ -164,12 +164,9 @@ function rotateNeighbors() {
   # Get closest neighbor that has been aligned 
   temp_dist = 0
   desired_azimuth = 0
-  neighbors.foreach( function(rid, data) {
-    #log("robot ", rid, ": azimuth   = ", data.azimuth) 
-    #if (neighbors.get(rid).distance < temp_dist) {
-    if ((read_knowledge(knowledge, rid, 9)<mydist) and (read_knowledge(knowledge, rid, 9) >= temp_dist)) {
-      #temp_dist = neighbors.get(rid).distance
-      temp_dist = read_knowledge(knowledge, rid, 9)
+  neighbors.foreach( function(rid, data) { 
+    if ((read_knowledge(knowledge, rid, 5)<mydist) and (read_knowledge(knowledge, rid, 5) >= temp_dist)) {
+      temp_dist = read_knowledge(knowledge, rid, 5)
       desired_id = rid
     }
   }) 
@@ -180,7 +177,7 @@ function rotateNeighbors() {
 
 function nextState() {
   neighbors.broadcast("dist_to_source", mydist)
-  debug("aligned")
+  #debug("aligned")
 }
 
 # Obtain gradient from neighbors
@@ -195,7 +192,7 @@ function dists() {
       # Listen to other robots' distances
       neighbors.listen("dist_to_source",
         function(value_id, value, robot_id) {
-          write_knowledge(knowledge, robot_id, 9, value) 
+          write_knowledge(knowledge, robot_id, 5, value) 
           mydist = math.min( mydist, neighbors.get(robot_id).distance + value)
             if (robot_id==0) {
                 mydist = neighbors.get(robot_id).distance

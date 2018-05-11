@@ -9,7 +9,7 @@ function write_knowledge(k, row, col, val) {
 function read_knowledge(k, row, col) {
     var key = string.concat(string.tostring(row),"-",string.tostring(col))
     if (k[key] == nil) {
-        # log("Warning: reading 'nil' value from the knowledge table, returning -1")
+        log("Warning: reading 'nil' value from the knowledge table, returning -1")
         return -1
     } else {
         return k[key]
@@ -132,11 +132,11 @@ ROBOTS = 5 # n-1 robots (Excluding source)
 
 function barrier_set(threshold, transf) {
   # debug("barrier set")
-  # barrier = stigmergy.create(BARRIER_VSTIG)
+  barrier = stigmergy.create(BARRIER_VSTIG)
   statef = function() {
     barrier_wait(threshold, transf)
   }
-  # log("barrier created")
+  log("barrier created")
   
 }
 
